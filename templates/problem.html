@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+{% block title %}{{ problem.title }}{% endblock %}
+{% block content %}
+<a class="back-link" href="/">← Back to problems</a>
+<div class="workspace-header">
+  <div><p class="eyebrow">{{ problem.topic }}</p><h1>{{ problem.title }}</h1></div>
+  <span class="difficulty {{ problem.difficulty|lower }}">{{ problem.difficulty }}</span>
+</div>
+<div class="workspace">
+  <section class="panel statement-panel">
+    <h3>Problem statement</h3>
+    <p>{{ problem.description }}</p>
+    <h4>Input format</h4><p>{{ problem.input_format }}</p>
+    <h4>Output format</h4><p>{{ problem.output_format }}</p>
+    <h4>Constraints</h4><p>{{ problem.constraints }}</p>
+    <h4>Example</h4>
+    {% for example in problem.examples %}
+    <div class="example-grid">
+      <div><span class="mini-label">INPUT</span><pre>{{ example.input }}</pre></div>
+      <div><span class="mini-label">OUTPUT</span><pre>{{ example.output }}</pre></div>
+    </div>
+    {% endfor %}
+    <div class="notice"><strong>Execution contract:</strong> Write a complete Python program. Read from standard input and print the answer to standard output.</div>
+    <section class="history-section"><h3>Recent submissions</h3><div id="history-list" class="history-list">Loading...</div></section>
+  </section>
+  <section class="panel editor-panel">
+    <div class="editor-toolbar"><span>PYTHON 3</span><button class="button button-quiet" id="reset-code">Reset code</button></div>
+    <textarea id="code-editor" spellcheck="false" aria-label="Python code editor">{{ problem.starter_code }}</textarea>
+    <div class="input-area">
+      <label for="custom-input">Custom input</label>
+      <textarea id="custom-input" class="custom-input" spellcheck="false" placeholder="Enter test input here...">{{ problem.examples[0].input }}</textarea>
+    </div>
+    <div class="editor-actions">
+      <button class="button button-secondary" id="run-button">▶ Run custom input</button>
+      <button class="button button-primary" id="submit-button">Submit solution</button>
+    </div>
+    <div id="run-output" class="result-panel" aria-live="polite"><div class="empty-state">Your execution results will appear here.</div></div>
+  </section>
+</div>
+{% endblock %}
+{% block scripts %}
+<script>
+  window.ALGO_PROBLEM = { id: {{ problem.id }}, starterCode: {{ problem.starter_code|tojson }} };
+</script>
+{% endblock %}

@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+{% block title %}Dashboard{% endblock %}
+{% block content %}
+<section class="hero">
+  <div>
+    <p class="eyebrow">DSA PRACTICE WORKSPACE</p>
+    <h1>Build logic.<br><span class="gradient-text">Prove it with tests.</span></h1>
+    <p class="hero-copy">Solve curated data-structure and algorithm challenges, run test cases, and measure your progress.</p>
+  </div>
+  <div class="hero-art"><div class="orb"></div><div class="code-card"><span>def solve(problem):</span><br>&nbsp;&nbsp;think()<br>&nbsp;&nbsp;test()<br>&nbsp;&nbsp;improve()</div></div>
+</section>
+
+<section class="stats-grid">
+  <article class="stat-card"><span class="stat-label">Problems available</span><strong id="stat-problems">{{ stats.total_problems }}</strong><small>Curated challenges</small></article>
+  <article class="stat-card"><span class="stat-label">Problems solved</span><strong id="stat-solved">{{ stats.solved_problems }}</strong><small>Accepted at least once</small></article>
+  <article class="stat-card"><span class="stat-label">Submissions</span><strong id="stat-submissions">{{ stats.total_submissions }}</strong><small>Total attempts</small></article>
+  <article class="stat-card"><span class="stat-label">Success rate</span><strong id="stat-rate">{{ stats.success_rate }}%</strong><small>Accepted submissions</small></article>
+</section>
+
+<section class="section-heading">
+  <div><p class="eyebrow">YOUR PRACTICE SET</p><h2>Problem library</h2></div>
+  <span class="muted" id="problem-count"></span>
+</section>
+<section class="filters">
+  <input id="search" type="search" placeholder="Search problems..." aria-label="Search problems">
+  <select id="topic-filter" aria-label="Filter by topic"><option value="">All topics</option></select>
+  <select id="difficulty-filter" aria-label="Filter by difficulty">
+    <option value="">All levels</option><option>Easy</option><option>Medium</option><option>Hard</option>
+  </select>
+</section>
+<section id="problem-list" class="problem-grid"><div class="loading">Loading problems...</div></section>
+{% endblock %}
